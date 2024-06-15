@@ -12,6 +12,7 @@ import study_jwt.security_login.service.MemberService;
 @RequiredArgsConstructor
 public class MemberController {
     // 생성자 주입 방식(객체를 스프링 빈으로 등록할 때 자동적으로 서비스 클래스에 대한 객체를 주입을 받는다. -> controller가 service의 메서드나 필드들을 사용할 수 있게 되는 권한이 생김)
+    // controller -> service
     private final MemberService memberService; // memberService 필드를 매개변수로 하는 controller 생성자를 만들어준다.
 
     // 회원가입 페이지 출력 요청

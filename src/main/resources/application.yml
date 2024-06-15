@@ -13,7 +13,7 @@ spring:
   thymeleaf:
     cache: false
 
-  # spring data jpa 설정
+  # spring data jpa 설정(콘솔 창에서 메세지 처리 과정을 본다 안 본다를 설정)
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     open-in-view: false
