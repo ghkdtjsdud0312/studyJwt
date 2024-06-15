@@ -1,14 +1,18 @@
 package study_jwt.security_login.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import study_jwt.security_login.dto.MemberDTO;
+import study_jwt.security_login.service.MemberService;
 
 @Controller
+@RequiredArgsConstructor
 public class MemberController {
+    // 생성자 주입 방식(객체를 스프링 빈으로 등록할 때 자동적으로 서비스 클래스에 대한 객체를 주입을 받는다. -> controller가 service의 메서드나 필드들을 사용할 수 있게 되는 권한이 생김)
+    private final MemberService memberService; // memberService 필드를 매개변수로 하는 controller 생성자를 만들어준다.
 
     // 회원가입 페이지 출력 요청
     @GetMapping("/member/save")
@@ -23,6 +27,8 @@ public class MemberController {
         System.out.println("MemberController.save");
         // soutp 하면 3가지 값을 다 볼 수 있다.
         System.out.println("memberDTO = " + memberDTO);
+//        MemberService memberService = new MemberService(); // controller에서 service로 넘길 때 호출하면서 메서드 호출 시 이 방식을 사용하지 않는다.
+          memberService.save(memberDTO);
         return "index";
     }
 }
