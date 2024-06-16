@@ -32,4 +32,16 @@ public class MemberController {
           memberService.save(memberDTO);
         return "login"; // 회원 가입이 완료 되면 로그인 페이지로 가도록 할 것이다.
     }
+
+    @PostMapping("/member/login")
+    public String login(@ModelAttribute MemberDTO memberDTO) {
+        MemberDTO loginResult = memberService.login(memberDTO);
+        if (loginResult != null) {
+            // login 성공
+            return "main";
+        } else {
+            // login 실패
+            return "login";
+        }
+    }
 }

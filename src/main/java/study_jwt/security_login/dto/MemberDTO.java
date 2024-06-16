@@ -1,6 +1,7 @@
 package study_jwt.security_login.dto;
 
 import lombok.*;
+import study_jwt.security_login.entity.MemberEntity;
 
 // 원래 Getter, Setter를 만들어줘야 하지만 Getter, Setter 어노테이션을 붙이면 자동으로 만들어 준다.
 @Getter
@@ -16,4 +17,13 @@ public class MemberDTO { // 회원 정보에 필요한 내용들을 필드로 �
     private String memberEmail;
     private String memberPassword;
     private String memberName;
+
+    public static MemberDTO toMemberDTO(MemberEntity memberEntity) {
+        MemberDTO memberDTO = new MemberDTO();
+        memberDTO.setId(memberEntity.getId());
+        memberDTO.setMemberEmail(memberEntity.getMemberEmail());
+        memberDTO.setMemberPassword(memberEntity.getMemberPassword());
+        memberDTO.setMemberName(memberEntity.getMemberName());
+        return memberDTO;
+    }
 }
