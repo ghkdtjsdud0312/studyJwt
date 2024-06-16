@@ -30,6 +30,6 @@ public class MemberController {
         System.out.println("memberDTO = " + memberDTO);
 //        MemberService memberService = new MemberService(); // controller에서 service로 넘길 때 호출하면서 메서드 호출 시 이 방식을 사용하지 않는다.
           memberService.save(memberDTO);
-        return "index";
+        return "login"; // 회원 가입이 완료 되면 로그인 페이지로 가도록 할 것이다.
     }
 }
