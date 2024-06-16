@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import study_jwt.security_login.dto.MemberDTO;
 import study_jwt.security_login.service.MemberService;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
@@ -34,10 +36,11 @@ public class MemberController {
     }
 
     @PostMapping("/member/login")
-    public String login(@ModelAttribute MemberDTO memberDTO) {
+    public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
         MemberDTO loginResult = memberService.login(memberDTO);
         if (loginResult != null) {
             // login 성공
+            session.setAttribute("loginEmail", loginResult.getMemberEmail());
             return "main";
         } else {
             // login 실패
