@@ -14,11 +14,15 @@ public class MemberService {
 
     // controller와 service에서는 DTO 객체를 받아옴
     public void save(MemberDTO memberDTO) { // save 메서드
-        // 1. dto -> entity 변환
-        // 2. repository의 save 메서드 호출
         // tip! 맥은 option + enter 하면 좌변을 자동으로 만들어주는 단축키 기능이 있음
+
+        // 1. dto -> entity 변환
         MemberEntity memberEntity = MemberEntity.toMemberEntity(memberDTO);
-        memberRepository.save(memberEntity); // jpa가 제공 해주는 메서드
+
+        // 2. repository의 save 메서드 호출
+        // save 메서드를 호출해서 스프링 데이터 jpa가 쿼리를 만들어 준다.(insert query)
+        memberRepository.save(memberEntity);
+
         // repository의 save 메서드 호출(jpa를 사용/ 조건은 entity 객체를 넘겨줘야 함)
     }
 }
