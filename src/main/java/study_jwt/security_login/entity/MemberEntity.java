@@ -2,6 +2,7 @@ package study_jwt.security_login.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import study_jwt.security_login.dto.MemberDTO;
 
 import javax.persistence.*;
 
@@ -23,4 +24,13 @@ public class MemberEntity { // table 역할을 한다.
 
     @Column
     private String memberName;
+
+    public static MemberEntity toMemberEntity(MemberDTO memberDTO) {
+        MemberEntity memberEntity = new MemberEntity();
+        // 엔티티 객체.set~ (dto 객체.get~)
+        memberEntity.setMemberEmail(memberDTO.getMemberEmail());
+        memberEntity.setMemberPassword(memberDTO.getMemberPassword());
+        memberEntity.setMemberName(memberDTO.getMemberName());
+        return memberEntity;
+    }
 }
