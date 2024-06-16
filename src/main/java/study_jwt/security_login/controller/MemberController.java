@@ -1,5 +1,6 @@
 package study_jwt.security_login.controller;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +34,11 @@ public class MemberController {
 //        MemberService memberService = new MemberService(); // controller에서 service로 넘길 때 호출하면서 메서드 호출 시 이 방식을 사용하지 않는다.
           memberService.save(memberDTO);
         return "login"; // 회원 가입이 완료 되면 로그인 페이지로 가도록 할 것이다.
+    }
+
+    @GetMapping("/member/login")
+    public String loginForm() {
+        return "login";
     }
 
     @PostMapping("/member/login")
