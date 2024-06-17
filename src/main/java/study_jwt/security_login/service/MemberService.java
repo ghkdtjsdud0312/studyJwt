@@ -87,4 +87,15 @@ public class MemberService {
             return null;
         }
     }
+
+    // 회원 수정
+    public MemberDTO updateForm(String myEmail) {
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberEmail(myEmail);
+        if (optionalMemberEntity.isPresent()) {
+            // 회원 조회 부분과 동일
+            return MemberDTO.toMemberDTO(optionalMemberEntity.get());
+        } else {
+            return null;
+        }
+    }
 }

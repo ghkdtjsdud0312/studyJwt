@@ -80,4 +80,14 @@ public class MemberController {
         model.addAttribute("member", memberDTO);
         return "detail";
     }
+
+    //회원 수정
+    @GetMapping("/member/update")
+    // 내 정보를 세션에 담아 두었기 때문에 세션 안에 이메일, 비번, 이름 값을 가져와서 나의 전체 정보를 db로 부터 가져와 model에 담아서 update.html에 가져가는 과정
+    public String myEmail(HttpSession session, Model model) {
+        String myEmail = (String) session.getAttribute("loginEmail"); // object인데 강제 형변환 해서 우측에 (String)을 넣어준다.
+        MemberDTO memberDTO = memberService.updateForm(myEmail);
+        model.addAttribute("updateMember", memberDTO); // 1. service에서 updateMember에 내용을 담고
+        return "update"; // 2. update.html로 간다.
+    }
 }
