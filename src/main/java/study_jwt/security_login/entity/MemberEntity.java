@@ -25,9 +25,21 @@ public class MemberEntity { // table 역할을 한다.
     @Column
     private String memberName;
 
+    // 회원가입에 필요한 것
     public static MemberEntity toMemberEntity(MemberDTO memberDTO) {
         MemberEntity memberEntity = new MemberEntity();
         // 엔티티 객체.set~ (dto 객체.get~)
+        memberEntity.setMemberEmail(memberDTO.getMemberEmail());
+        memberEntity.setMemberPassword(memberDTO.getMemberPassword());
+        memberEntity.setMemberName(memberDTO.getMemberName());
+        return memberEntity;
+    }
+
+    // 회원 정보 수정에 필요
+    public static MemberEntity toUpdateMemberEntity(MemberDTO memberDTO) {
+        MemberEntity memberEntity = new MemberEntity();
+        // 엔티티 객체.set~ (dto 객체.get~)
+        memberEntity.setId(memberDTO.getId()); // update 시 아이디를 추가 해줘야 정상적으로 작동
         memberEntity.setMemberEmail(memberDTO.getMemberEmail());
         memberEntity.setMemberPassword(memberDTO.getMemberPassword());
         memberEntity.setMemberName(memberDTO.getMemberName());

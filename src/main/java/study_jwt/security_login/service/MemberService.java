@@ -88,7 +88,7 @@ public class MemberService {
         }
     }
 
-    // 회원 수정
+    // 회원 수정(db 내용 조회)
     public MemberDTO updateForm(String myEmail) {
         Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberEmail(myEmail);
         if (optionalMemberEntity.isPresent()) {
@@ -97,5 +97,12 @@ public class MemberService {
         } else {
             return null;
         }
+    }
+
+    // 회원 수정(db 내용 수정)
+    public void update(MemberDTO memberDTO) {
+        // id가 없으면 insert query를 실행해줌 -> db에 있는 id가 entity 객체가 넘어오면 업데이트 쿼리를 날려줌
+        // update가 없어서 save 사용
+        memberRepository.save(MemberEntity.toUpdateMemberEntity(memberDTO)); // update를 하기 위해서는 entity에 setId를 추가해줘야 한다, 그렇지 않으면 insert 문으로 작동
     }
 }

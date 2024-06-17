@@ -3,10 +3,7 @@ package study_jwt.security_login.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import study_jwt.security_login.dto.MemberDTO;
 import study_jwt.security_login.service.MemberService;
 
@@ -81,7 +78,7 @@ public class MemberController {
         return "detail";
     }
 
-    //회원 수정
+    //회원 수정(db 내용 조회)
     @GetMapping("/member/update")
     // 내 정보를 세션에 담아 두었기 때문에 세션 안에 이메일, 비번, 이름 값을 가져와서 나의 전체 정보를 db로 부터 가져와 model에 담아서 update.html에 가져가는 과정
     public String myEmail(HttpSession session, Model model) {
@@ -89,5 +86,15 @@ public class MemberController {
         MemberDTO memberDTO = memberService.updateForm(myEmail);
         model.addAttribute("updateMember", memberDTO); // 1. service에서 updateMember에 내용을 담고
         return "update"; // 2. update.html로 간다.
+    }
+
+    // 회원 수정(db 내용 수정)
+    @PostMapping("/member/update")
+    public String update(@ModelAttribute MemberDTO memberDTO) {
+        memberService.update(memberDTO);
+        // model에 담아서 return 값으로 넘어감 하지만 여기서는 그 과정이 없다.
+        // 다른 컨트롤러를 리다이렉트해서 그 값을 넘겨줌
+        // 내 정보를 수정하고 나서 수정이 완료된 나의 상세 페이지를 띄어줌
+        return "redirect:/member/" + memberDTO.getId();
     }
 }
