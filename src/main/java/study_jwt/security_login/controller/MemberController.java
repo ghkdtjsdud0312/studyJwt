@@ -3,6 +3,7 @@ package study_jwt.security_login.controller;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +11,7 @@ import study_jwt.security_login.dto.MemberDTO;
 import study_jwt.security_login.service.MemberService;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -53,4 +55,16 @@ public class MemberController {
             return "login";
         }
     }
+
+    @GetMapping("/member/")
+    // findAll : DB의 모든 값을 끌어온다.
+    // Model은 스프링에서 실어나르는 역할을 해주는 개체
+    public String findAll(Model model) {
+        List<MemberDTO> memberDTOList = memberService.findAll(); // 여러 개를 가져와야 하므로 List 사용
+        // model 객체에 List를 담아서 addAttribute 메서드에 작업해본다.
+        // 어떠한 html로 가져갈 데이터가 있다면 model 사용
+        model.addAttribute("memberList", memberDTOList);
+        return "list";
+    }
+
 }
