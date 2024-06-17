@@ -1,11 +1,11 @@
 package study_jwt.security_login.controller;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import study_jwt.security_login.dto.MemberDTO;
 import study_jwt.security_login.service.MemberService;
@@ -38,11 +38,13 @@ public class MemberController {
         return "login"; // 회원 가입이 완료 되면 로그인 페이지로 가도록 할 것이다.
     }
 
+    // 회원 로그인 정보 가져오기
     @GetMapping("/member/login")
     public String loginForm() {
         return "login";
     }
 
+    // 회원 로그인 입력
     @PostMapping("/member/login")
     public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
         MemberDTO loginResult = memberService.login(memberDTO);
@@ -56,6 +58,7 @@ public class MemberController {
         }
     }
 
+    // 회원 목록
     @GetMapping("/member/")
     // findAll : DB의 모든 값을 끌어온다.
     // Model은 스프링에서 실어나르는 역할을 해주는 개체
@@ -67,4 +70,14 @@ public class MemberController {
         return "list";
     }
 
+    // 회원 조회
+    @GetMapping("/member/{id}")
+    // /member/{id} 이 경로 상에 있는 값을 rest API 같은 주소 체계를 쓸 땐 @PathVariable를 사용
+    // @PathVariable -> 경로 상에 있는 값을 가져올 떈 @PathVariable 어노테이션을 사용
+    // model 객체는 화면 상에 가져가야 하므로 필요
+    public String findById(@PathVariable Long id, Model model) {
+        MemberDTO memberDTO = memberService.findById(id); // 한 명이므로 dto
+        model.addAttribute("member", memberDTO);
+        return "detail";
+    }
 }

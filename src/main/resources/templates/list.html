@@ -28,10 +28,13 @@
     <td th:text="${member.memberName}"></td>
     <td>
       <!-- query string /member?id=1
-          rest api /member/1 -->
+          rest api /member/1 -> 주소만으로 어떤 자원인지를 식별하자 -->
+      <!-- @{|/member/${member.id}|} 여기서 @{| ~ |} 는 타입리프에서 지원하는 문법 => 경로상에다가 서버에서 가져온 데이터를 모델 값과 같이 표현하려고 할 때 사용 -->
+      <!-- 그렇게 되면 경로상에 가지고 있는 값이 그대로 찍히게 된다. -->
       <a th:href="@{|/member/${member.id}|}">조회</a>
     </td>
     <td>
+     <!-- 삭제 주소도 rest api /member/1 로 날라가야한다.-->
       <a th:href="@{|/member/delete/${member.id}|}">삭제</a>
     </td>
   </tr>

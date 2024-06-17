@@ -56,6 +56,7 @@ public class MemberService {
 
     }
 
+    // 회원 목록
     public List<MemberDTO> findAll() {
         // repository와 연관된 것은 반드시 entity이다.
         List<MemberEntity> memberEntityList = memberRepository.findAll();
@@ -69,5 +70,21 @@ public class MemberService {
 //            memberDTOList.add(memberDTO); // 5. List에 담는다.
         }
         return memberDTOList;
+    }
+
+    // 회원 조회
+    public MemberDTO findById(Long id) {
+        // 이메일로 회원 정보 조회
+        // query 문 : select * from member_table where member_email=?
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findById(id);
+        if (optionalMemberEntity.isPresent()) {
+//            MemberEntity memberEntity = optionalMemberEntity.get();
+//            MemberDTO memberDTO = MemberDTO.toMemberDTO(memberEntity);
+//            return memberDTO;
+            // 위에 주석처리한 3줄을 밑에 한 줄로 표현함
+            return MemberDTO.toMemberDTO(optionalMemberEntity.get()); // 1. optionalMemberEntity.get()에서 optional로 감싸져 있는 것을 열고 toMemberDTO에 MemberDTO 메서드를 보내서 dto로 변환을 한 결과를 컨트롤러로 리턴을 준다.
+        } else {
+            return null;
+        }
     }
 }
