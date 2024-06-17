@@ -61,10 +61,10 @@ public class MemberService {
         List<MemberEntity> memberEntityList = memberRepository.findAll();
         // entity가 여러개 담긴 객체 -> dto가 여러개 담긴 객체로 반환 해줘야 한다.
         List<MemberDTO> memberDTOList = new ArrayList<>(); // 담아 갈 객체 만들어줌
-        // entity객체를 하나 하나 꺼내서 dto에 하나 하나 넣어줘야 한다.
+        // entity 객체를 하나 하나 꺼내서 dto에 하나 하나 넣어 줘야 한다.
         for (MemberEntity memberEntity : memberEntityList) { // 2. memberEntity 객체를 for each로 접근한다.
             memberDTOList.add(MemberDTO.toMemberDTO(memberEntity)); // 1. memberDTOList는 dto객체를 담기위한 리스트 / 3. toMemberDTO 하나를 dto로 변환 시키고
-            // 위 한문장과 밑에 두 줄은 같은 것이다. 둘 중에 하나만 사용 해도 무방
+            // 위 한 문장과 밑에 두 줄은 같은 것이다. 둘 중에 하나만 사용 해도 무방
 //            MemberDTO memberDTO = MemberDTO.toMemberDTO(memberEntity); // 4. dto 변환된 객체를
 //            memberDTOList.add(memberDTO); // 5. List에 담는다.
         }
