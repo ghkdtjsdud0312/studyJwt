@@ -111,4 +111,11 @@ public class MemberController {
         session.invalidate(); // session을 무효화 한다.
         return "index"; // 홈페이지로 이동
     }
+
+    // 회원가입 시 이메일 중복 확인
+    @PostMapping("/member/email-check")
+    public @ResponseBody String emailCheck(@RequestParam("memberEmail") String memberEmail) {
+        System.out.println("memberEmail = " + memberEmail);
+        return "체크완료";
+    }
 }
