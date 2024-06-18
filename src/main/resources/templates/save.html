@@ -29,6 +29,23 @@
     const emailCheck = () => {
         const email = document.getElementById("memberEmail").value;
         console.log("입력값 : ", email );
+    <!-- jquery에서 제공해주는 ajax 함수, 순수 자바스크립트보단 훨씬 편하게 쓸 수 있어 사용 -->
+        $.ajax({
+            // 요청방식 : post, url : "email-check", 데이터 : 이메일
+            type : "post",
+            url : "email-check"
+            data : {
+                // 파라미터 이름 : 담겨가는 데이터
+                "memberEmail" : email
+            },
+            // 요청 응답이 제대로 오는지 확인 하는 부분
+            success : function(res) {
+                 console.log("요청 성공", res);
+            },
+            error : function(err) {
+                console.log("에러 발생", err);
+            }
+        });
     }
 </script>
 </html>
