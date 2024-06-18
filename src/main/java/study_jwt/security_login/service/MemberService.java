@@ -106,6 +106,8 @@ public class MemberService {
         memberRepository.save(MemberEntity.toUpdateMemberEntity(memberDTO)); // update를 하기 위해서는 entity에 setId를 추가해줘야 한다, 그렇지 않으면 insert 문으로 작동
     }
 
+    // 회원 삭제
     public void deleteById(Long id) {
+        memberRepository.deleteById(id);
     }
 }
