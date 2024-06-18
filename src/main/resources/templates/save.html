@@ -15,7 +15,7 @@
         <!-- 이메일에서 id="memberEmail"은 아이디를 하나만 가질 수 있다. 라는 의미 -->
         <!-- id 속성은 중복해서 쓸 수 없고, name이나 다른 것들은 중복해서 사용 가능하다.-->
         <!-- onkeyup="emailCheck()" => onkeyup은 이벤트 처리하는 속성 중 하나인데 키보드를 하나씩 입력할 때마다 함수 호출, 하나씩 칠 때마다 백엔드로 요청을 보냄 -->
-        이메일 : <input type="text" name="memberEmail" id="memberEmail" onkeyup="emailCheck()"> <br>
+        이메일 : <input type="text" name="memberEmail" id="memberEmail" onblur="emailCheck()"> <br>
         <p id="check-result"></p>
         비밀번호 : <input type="password" name="memberPassword"> <br>
         이름 : <input type="text" name="memberName"> <br>
