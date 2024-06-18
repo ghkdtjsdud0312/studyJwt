@@ -117,6 +117,11 @@ public class MemberController {
     public @ResponseBody String emailCheck(@RequestParam("memberEmail") String memberEmail) {
         System.out.println("memberEmail = " + memberEmail);
         String checkResult = memberService.emailCheck(memberEmail);
-        return "체크완료";
+        return checkResult; // if ~ else문 사용하지 않아도 return 문장으로 끝낼 수 있다.
+//        if (checkResult != null) {
+//            return "ok";
+//        } else {
+//            return "no";
+//        }
     }
 }
