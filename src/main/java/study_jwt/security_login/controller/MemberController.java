@@ -97,4 +97,11 @@ public class MemberController {
         // 내 정보를 수정하고 나서 수정이 완료된 나의 상세 페이지를 띄어줌
         return "redirect:/member/" + memberDTO.getId();
     }
+
+    // 회원 삭제하기
+    @GetMapping("/member/delete/{id}")
+    public String deleteById(@PathVariable Long id) {
+        memberService.deleteById(id);
+        return "redirect:/member/";
+    }
 }
