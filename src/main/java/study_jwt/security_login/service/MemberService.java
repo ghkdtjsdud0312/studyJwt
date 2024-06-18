@@ -110,4 +110,16 @@ public class MemberService {
     public void deleteById(Long id) {
         memberRepository.deleteById(id);
     }
+
+    // 회원 이메일 중복확인
+    public String emailCheck(String memberEmail) {
+        Optional<MemberEntity> byMemberEmail = memberRepository.findByMemberEmail(memberEmail);
+        if (byMemberEmail.isPresent()) {
+            // 조회 결과가 있다 -> 이메일을 사용할 수 없다.
+            return null;
+        } else {
+            // 조회 결과가 없다 -> 이메일을 사용할 수 있다.
+            return "ok";
+        }
+    }
 }
